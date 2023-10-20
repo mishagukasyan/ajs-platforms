@@ -4,20 +4,22 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'webpack-numbers.js',
-    library: "webpackNumbers",
+    filename: 'index.js',
+    library: "ajs-platforms",
+    libraryTarget: 'umd', 
+    libraryExport: 'default',
     globalObject: 'this',
-    library: {
-      name: 'webpackNumbers',
-      type: 'umd',
+   
     },
-  },  
-    externals: {
-    lodash: {
-      commonjs: 'lodash',
-      commonjs2: 'lodash',
-      amd: 'lodash',
-      root: '_',
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+          },
+        },
+      ],
     },
-  },
-};
+  };
